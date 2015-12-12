@@ -30,6 +30,10 @@
       font-size:1.25em;
     }
 
+    .x .tick line {
+      opacity:0.075;
+    }
+
     path.trip {
       stroke: black;
       stroke-width: 1;
@@ -50,20 +54,15 @@
       var width = 1315 - margin.left - margin.right,
           height = 700 - margin.bot;
 
-      // d3.select("body")
-      //   .append("h2")
-      //   .text("Timeline of Solar System Exploration");
-
       var svg = d3.select("#vis")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.bot);
 
-      // Draw Places / Year Scales
+      // Create Places / Year Scales & Axis
 
       var g = d3.select("svg")
         .append('g')
         .attr("class", "locs");
-
 
       var loc_scale = d3.scale.ordinal()
         .domain(locs.map(function (d) {return d['name'];}))
@@ -72,21 +71,15 @@
       var loc_axis = d3.svg.axis()
         .scale(loc_scale)
         .orient("left");
-      
-      // g.selectAll("text")
-      //   .data(locs)
-      //   .enter()
-      //   .append("text")
-      //   .attr("y", function (d) {return +d['position']*height;})
-      //   .text(function (d) {return d['name'];});
 
-
-      var p_delta = loc_scale.rangeBand()//0.091;
+      // This is the height of each location band
+      var p_delta = loc_scale.rangeBand();
 
       var time_scale = d3.scale.linear()
         .range([margin.left, width + margin.left])
         .domain([1958, 2015]);
 
+      // Add fill backgrounds with a color for each location
       g.selectAll("rect.back")
         .data(locs)
         .enter()
@@ -101,18 +94,13 @@
         .style("fill", function (d) {return d['color'];})
         .style("opacity", 0.35);
 
-
-
-
-      // var loc_axis = d3.svg.axis()
-      //   .scale(loc_scale)
-      //   .orient("left");
-
       var time_axis = d3.svg.axis()
         .scale(time_scale)
         .orient("bottom")
+        .tickSize(-height)
         .tickFormat(d3.format("04d"));
 
+      // Create tooltip using a very nice external library
       var tip = d3.tip()
         .attr("class", "d3-tip")
         .direction('s')
@@ -131,27 +119,24 @@
           return text;
         });
 
-      svg.call(tip)
+      svg.call(tip);
 
       svg.on("click", tip.hide);
 
-      // Function to draw mission path
+
+
+      // Function to draw the missions
       function draw_missions(data) {
 
         // Draw trip section of path
-          // Not if launch=arrival
-          // Appropriate marker type
-          // Stagger y for each mission on track
+          // Not if launch = arrival
+          // Stagger y for each mission to space out
 
-        var loop_limit = 12;
+        // # of missions vertically within a band
+        var loop_limit = 12; 
         var time_delta = time_scale(2001) - time_scale(2000);
 
-        function calc_x_factor(i) {
-          var mod = i % loop_limit;
-          var x_factor = time_delta * mod/loop_limit - 0.5*time_delta;
-          return x_factor;
-        }
-
+        // Calculates a y offset, cycling based on loop_limit
         function calc_y_factor(i) {
           var mod = i % loop_limit;
           var band = loc_scale.rangeBand();
@@ -167,6 +152,7 @@
           }
         }
 
+        // Trip section, if needed
         svg.append('g')
           .attr("class","mission")
           .selectAll("path.trip")
@@ -174,34 +160,27 @@
           .enter()
           .append("path")
           .attr("class", "trip")
-          .attr("stroke", "black")
-          .attr("stroke-width", 1)
-          .attr("stroke-dasharray", "5,5")
           .attr('d', function (d, i) {
-            var x_factor = calc_x_factor(i)*0.9;
             var y_factor = calc_y_factor(i)*0.9;
             var x0 = time_scale(d['launch']); 
             var x1 = time_scale(d['arrival']);
             if (x0===x1) {
               return "";
             }
-
             var y0 = loc_scale("Earth") + y_factor;
             var y1 = loc_scale(d['destination']) + y_factor; 
             return "M" + x0 + " " + y0 + " L" + x1 + " " + y1;
           });
 
+        // Activity section if needed
         d3.select("g.mission")
           .selectAll("path.activity")
           .data(data)
           .enter()
           .append("path")
           .attr("class", "activity")
-          .attr("stroke", "black")
-          .attr("stroke-width", 1.5)
           .attr("marker-end", select_marker)
           .attr("d", function (d, i) {
-            var x_factor = calc_x_factor(i)*0.9;
             var y_factor = calc_y_factor(i)*0.9;
             var x0 = time_scale(d['arrival']); 
             var x1 = time_scale(d['end']);
@@ -213,16 +192,20 @@
             var y1 = loc_scale(d['destination']) + y_factor;
             return "M" + x0 + " " + y0 + " L" + x1 + " " + y1;
           })
-          .on("mouseover", tip.show);
+          .on("mouseover", tip.show); // Add tooltip to activity
 
+        // Add callback for zoom behaviour
         g.selectAll("text")
-          .on("click", zoom_loc)
+          .on("click", zoom_loc);
 
+        // This function is called during every zoom event
         function update_missions(t_time) {
 
+          // Filter missions if necessary (won't always be zoomed in)
           var m_filtered;
           var loc_filtered;
           if (loc_scale.domain().length === 1) {
+            // Only one location in scale -> Zoomed in
             m_filtered = data.filter(function (d) {
               return d['destination'] === loc_scale.domain()[0];
             });
@@ -230,24 +213,26 @@
               return d['name'] === loc_scale.domain()[0];
             });
           } else {
+            // Not just one -> zoomed out
             m_filtered = data;
             loc_filtered = locs;
           };
 
+          // For joining filtered data
           function keyfunc (d) {return d['name'];}
 
+          // Update trips by binding filtered data
           var trips = d3.select("g.mission")
             .selectAll('path.trip')
             .data(m_filtered, keyfunc);
 
-          trips.exit().remove()
+          // Remove anything filtered out
+          trips.exit().remove();
 
+          // Add missions initially at the top
           trips.enter()
             .append("path")
             .attr("class", "trip")
-            .attr("stroke", "black")
-            .attr("stroke-width", 1)
-            .attr("stroke-dasharray", "5,5")
             .attr('d' , function (d) {
               var x0 = time_scale(d['launch']);
               var x1 = time_scale(d['arrival']);
@@ -259,10 +244,10 @@
               }
             });
 
+          // Add transition of trips to real value
           trips.transition()
             .duration(t_time)
             .attr("d", function (d, i) {
-              var x_factor = calc_x_factor(i)*0.9;
               var y_factor = calc_y_factor(i)*0.9;
               var x0 = time_scale(d['launch']); 
               var x1 = time_scale(d['arrival']);
@@ -274,11 +259,57 @@
               } else {
                 var y0 = loc_scale("Earth") + loc_scale.rangeBand()*0.5;
               }
-
               var y1 = loc_scale(d['destination']) + y_factor; 
               return "M" + x0 + " " + y0 + " L" + x1 + " " + y1;
             });
 
+          // Mission type icons selection
+          var m_images = d3.select("g.mission")
+            .selectAll('image.mtype')
+            .data(m_filtered, keyfunc);
+
+          if (loc_scale.domain().length===1) {
+            // Add mission type icons when zoomed in
+            m_images.enter()
+            .append("image")
+            .attr("class", "mtype")
+            .attr('x', function (d) {
+              return time_scale(d['launch']) - 25;
+            })
+            .attr('y', function (d, i) {
+              var y_factor = calc_y_factor(i)*0.9;
+              return loc_scale(d['destination']) + y_factor;
+            })
+            .attr('height', 20)
+            .attr('width', 20)
+            .attr('xlink:href', function (d) {
+              return "img/" + d['type'] + ".png"
+            })
+            .attr('opacity', 0);
+
+            m_images.transition()
+            .duration(t_time)
+            .attr("opacity", 1);
+
+            // Show mission type legend
+            svg.select('image.m_legend')
+              .transition()
+              .duration(t_time)
+              .attr("opacity", 1);
+          } else {
+            // Remove mission type icons when zoomed out
+            m_images.transition()
+            .attr("opacity", 0)
+            .remove();
+
+            // Fade mission type legend
+            svg.select('image.m_legend')
+              .transition()
+              .duration(t_time)
+              .attr("opacity", 0);
+          }
+
+          // Update activities, similar to trips above
           activities = d3.select("g.mission")
             .selectAll('path.activity')
             .data(m_filtered, keyfunc);
@@ -297,13 +328,13 @@
               var y = 0;
               return "M" + x0 + " " + y + " L" + x1 + " " + y;
             })
-            .on("mouseover", tip.show);
+            .on("mouseover", tip.show); // Make sure mouseover is there
 
+          // Add mission names if zoomed in view
           if (loc_scale.domain().length===1) {
             m_names = d3.select("g.mission")
               .selectAll("text.name")
               .data(m_filtered, keyfunc);
-
 
             m_names.enter()
               .append("text")
@@ -325,16 +356,13 @@
             m_names.transition()
               .duration(t_time)
               .attr("opacity", 0)
-              .remove()
+              .remove();
           }
-
-
 
           activities.transition()
             .duration(t_time)
             .attr()
             .attr("d", function (d, i) {
-              var x_factor = calc_x_factor(i)*0.9;
               var y_factor = calc_y_factor(i)*0.9;
               var x0 = time_scale(d['arrival']); 
               var x1 = time_scale(d['end']);
@@ -347,16 +375,18 @@
               return "M" + x0 + " " + y0 + " L" + x1 + " " + y1;
             });
 
-
+          // Transition location color bands  bind data
           rects = g.selectAll("rect.back")
             .data(loc_filtered, keyfunc);
 
+          // Remove everything else
           rects.exit()
             .transition()
             .duration(t_time*0.75)
             .style("opacity", 0)
             .remove();
 
+          // Add what needs to be added
           rects.enter()
             .append("rect")
             .attr("class", "back")
@@ -365,6 +395,7 @@
             .style("fill", function (d) {return d['color'];})
             .style("opacity", 0);
 
+          // Transition above into view
           rects.transition()
             .duration(t_time)
             .attr("y", function (d) {
@@ -373,32 +404,44 @@
             .attr("height", loc_scale.rangeBand())
             .style("opacity", 0.35);
 
+          // Re-add the zoom callback to the axis text
           g.selectAll("text")
-          .on("click", zoom_loc)
+          .on("click", zoom_loc);
 
         }
 
+        // Callback function that initiaties the zoom in process
         function zoom_loc(d, i) {
-          to_loc = d3.select(this).text();
+          to_loc = d3.select(this).text(); // Name of location clicked
           if (to_loc==="Earth") {
+            // Nothing ignore Earth, nothing there
             return;
           } else if (loc_scale.domain().length === 1) {
+            // If zoomed in, zoom out
+            // Re-populate the loc_scale
             loc_scale.domain(locs.map(function (d) {return d['name'];}))
               .rangeBands([0,height],0,0.05);
           } else {
+            // Not zoomed in, zoom in
+            // The loc_scale is now the only location
             loc_scale.domain([to_loc]);
             loc_scale.rangeBands([0, height]);
           }
+          // Standard transition time
           var t_time = 1000;
+          // Transition the location axis
           d3.select("g.locs").transition().duration(t_time)
             .call(loc_axis);
+          // Update the missions and everything else besides the axis
           update_missions(t_time);
         }
 
       }
 
+      // Draw the missions from the data file
       d3.tsv("solar_exploration.tsv", draw_missions);
 
+      // Initialize the time and location axis
       svg.append('g')
         .attr('class', 'x axis')
         .attr('transform', "translate(0," + height + ")")
@@ -408,14 +451,14 @@
         .attr("transform", "translate(" + margin.left + ",0)")
         .call(loc_axis);
 
+      // Draw the legend
       var legend = d3.select("#legend");
 
-      // debugger;
       var lwidth = legend.attr("width");
       var lheight = legend.attr("height");
 
       ldata = {'launch': 0.1*lwidth, 'arrival':0.4*lwidth,
-                'end':0.7*lwidth, 'loc':0.5*lheight}
+                'end':0.7*lwidth, 'loc':0.5*lheight};
 
       legend.append("rect")
         .attr("width", lwidth)
@@ -455,25 +498,21 @@
         .attr("x",(ldata.end - ldata.arrival)*0.5 + ldata.arrival)
         .attr("y",ldata.loc - 15)
         .attr("text-anchor", "middle")
-        .text("Activity")
+        .text("Activity");
       legend.append("text")
         .attr("x", ldata.end + 10)
         .attr("y", ldata.loc)
-        .text("Success")
+        .text("Success");
 
+      // Add the legend (not drawn dynamically, easier to just use an image)
       svg.append("image")
-        .attr("xlink:href", "img/Missions_full.png")
-        .attr("x", margin.left + width + 20)
+        .attr('class', 'm_legend')
+        .attr("xlink:href", "img/Missions_legend.png")
+        .attr("x", margin.left + width + 40)
         .attr("y", 50)
-        .attr('height', 600)
-        .attr("width", 80)
-
-      // Bind and draw everything
-
-    	// Set Mouseover events
-
-    	// Set button actions/transitions
-    	
+        .attr('height', 747*0.5)
+        .attr("width", 465*0.5)
+        .attr("opacity", 0);
     }
       </script>
   </head>
@@ -515,17 +554,23 @@
     <div class="span3 offset1">
       <h4>Legend</h4>
       <svg id="legend" width="350", height="80"></svg>
-      <p>Mouse-over missions for more information and for a link to Wikipedia. Click in empty space to remove the tooltip.</p>
-      <p>Click text locations on the left to zoom in, click on it again to zoom out.</p>
+      <dl>
+        <dt>Trip</dt>
+        <dd>The length of time from the launch of the spacecraft to the arrival location where main mission activities take place. Not all missions involve physical travel to the location of interest. Travel times of under a year are not depicted.</dd>
+        <dt>Activity</dt>
+        <dd>The main mission activity is where scientific data acquisition takes place.</dd>
+      </dl>
+      <p><em>Mouse-over missions for more information and for a link to Wikipedia. Click in empty space to remove the tooltip.</em></p>
+      <p><em>Click text locations on the left to zoom in, click on it again to zoom out.</em></p>
     </div>
     <div class="span6">
-      <p>This visualization is an interactive, re-imagined version of <a href="https://commons.wikimedia.org/wiki/File:Timeline_of_Solar_System_exploration.jpg" target="_blank">this</a> infographic.</p>
+      <p>This visualization is an interactive, re-imagined version of <a href="https://commons.wikimedia.org/wiki/File:Timeline_of_Solar_System_exploration.jpg" target="_blank"><strong>this</strong></a> infographic.</p>
       <p>The intent was to present as much of the information from the original graphic as possible in a more accessible way, taking advantage of the interactivity that D3 enables. My first design decision was to place the time axis on the horizontal axis, taking advantage of a well established convention in line charts so that the user can more intuitively grasp the chart.</p>
       <p>One of the difficulties I found in the original chart was identifying locations. It was not always easy to match the color to the location in the legend and often necessitated zooming in and out many times, especially when the color was ambiguous. In extracting the colors I actually used a color picker tool in a paint program. I decided to make the color areas regular and have bands labeled right on the axis instead of in a separate legend. This, in my opinion, conveys the two most important variables of the chart (time and location) using the two most powerful visual indicators: position x and y. Because of the ordinal nature of the vertical position labels, I added the bands of color from the original graphic to strengthen this indicator.</p>
       <p>Because of the need to compress the larger infographic into a smaller area, some information was left out of the default view. A mouse over of the lines can get an info-box of more information on the missions. In the zoomed-in view of any of the locations the mission names are added, as will symbols for the mission type (work in progress). The default view does convey time, position, mission stages and mission success/failure for all of the missions at once without any zooming needing.</p>
       <p>The secondary destinations information from the original graph was not added, due to the complexity it would have created. This ended up reducing the total number of locations, however, as some locations were not the primary destination for any of the missions. This ended up making the overall graph still easier to read. I also did not deal with unusual mission sequences, such as the trip-activity-trip of the Dawn mission in the original graphic. Every mission in this graphic has one trip and then one activity period.</p>
       <p>Overall I believe I was able to represent the original graphic in a more accessible way. General patterns are observable and the outlines of the story of our exploration missions in the solar system are shown.</p>
-      <p>My name is Kaan Divringi and this is a final project for the Udacity class <a href="https://www.udacity.com/course/data-visualization-and-d3js--ud507" target="_blank">Data Visualization and D3.js</a>. This was done as part of a Data Analyst Nanodegree.</p>
+      <p>My name is Kaan Divringi and this is a final project for the Udacity class <a href="https://www.udacity.com/course/data-visualization-and-d3js--ud507" target="_blank"><strong>Data Visualization and D3.js</strong></a>. This was done as part of a Data Analyst Nanodegree.</p>
     </div><div class="offset2"
     
   </div>
