@@ -1,42 +1,80 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>My Occasional Mind | Some Fall Cleaning</title>
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
-    <meta name="generator" content="Pelican" />
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
 
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Kaan Divringi" />
+<meta name="description" content="It's been awhile and I've been busy, if not necessarily on this blog. A quick rundown: Projects Simulation Notebook: You can see the video from my portfolio. This is something that is tremendously exciting to me but I am having trouble finding the time to develop it further or even market it. It's been a busy year! Krypto: Recently I've been brushing up on my Javascript (see the Books section) so I can be more confident in presenting dynamic content on the web. This is the first project that I've used some of the object oriented features of the language. The code is a bit disorganized but it was some good practice in building something new in a somewhat lesser known language for me. I hope to be more confident building interactivity into some webpages with what I've learned (see Bokeh section below). Kaggle: There is a Kaggle dataset that has taken my fancy of late: The SEPTA On Time Performance Dataset. Right now I have a very basic kernel and a forum post in which I confuse days for hours but more is coming! Books I'm a bit weird in that I like reading not just books but programming books for fun. A few notables from my plate: Fluent Python: Excellent book, just excellent. I know Python and have been working with it for some number of years. This book, however, opened my eyes to some of the inner workings and underlying design decisions that make Python such a pleasure to work with. Areas of the language that seemed obtuse to me before were presented with opinionated context and through the gradual buildup I understood concepts that I previously found confusing. Also, more importantly, I got valuable context on when 'not' to use advanced features, avoiding the "Everything looks like a nail" situation. Great intermediate Python book. Algorithms to Live By: Self-help with programming? Such an odd but delightful concept but it makes sense that we can apply all of the research done in computer algorithms to our day to day lives. The best organization system is a pile (LRU Cache). You can vastly improve your predictions of the future by first selecting one of three probability distributions. Being in a rut in life is just a local minima that can be overcome with an injection of randomness. I cannot overstate how much I liked this book. Eloquent Javascript: I got this in the humble programming bundle. Great supposedly introductory book that quickly ramps up in difficulty. I will go back and review certain of the chapters but I highly enjoyed it. Sublime Text Power User: I've had the paid version of SublimeText for some time now but I've never really put it through it's paces. I hope to fully come up to speed with this book + video lectures. Links Modern Pandas: Great way to learn Brandon Rhodes Tutorials: An excellent lecturer, clear explanations and good presentations. I found the Pandas and SQL tutorials quite nice for brushing up and becoming cleaner with tools that I already know. Bokeh: I find the architecture of this young project fascinating and powerful. Really looking forward to getting into it more. At my work, where programming is not a major focus, the static but interactive html documents it produces have been killer for me. I used to think that you needed a backend server to have most types of widgets/interactivity but it looks like you can also accomplish this by using more Javascript. A major motivator in my learning of Javascript more deeply. Linear Regression With Python: Nothing too earth shattering here but I highly appreciated the explanation of those terms from a regression analysis in statsmodels :)" />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="My Occasional Mind"/>
+<meta property="og:title" content="Some Fall Cleaning"/>
+<meta property="og:description" content="It's been awhile and I've been busy, if not necessarily on this blog. A quick rundown: Projects Simulation Notebook: You can see the video from my portfolio. This is something that is tremendously exciting to me but I am having trouble finding the time to develop it further or even market it. It's been a busy year! Krypto: Recently I've been brushing up on my Javascript (see the Books section) so I can be more confident in presenting dynamic content on the web. This is the first project that I've used some of the object oriented features of the language. The code is a bit disorganized but it was some good practice in building something new in a somewhat lesser known language for me. I hope to be more confident building interactivity into some webpages with what I've learned (see Bokeh section below). Kaggle: There is a Kaggle dataset that has taken my fancy of late: The SEPTA On Time Performance Dataset. Right now I have a very basic kernel and a forum post in which I confuse days for hours but more is coming! Books I'm a bit weird in that I like reading not just books but programming books for fun. A few notables from my plate: Fluent Python: Excellent book, just excellent. I know Python and have been working with it for some number of years. This book, however, opened my eyes to some of the inner workings and underlying design decisions that make Python such a pleasure to work with. Areas of the language that seemed obtuse to me before were presented with opinionated context and through the gradual buildup I understood concepts that I previously found confusing. Also, more importantly, I got valuable context on when 'not' to use advanced features, avoiding the "Everything looks like a nail" situation. Great intermediate Python book. Algorithms to Live By: Self-help with programming? Such an odd but delightful concept but it makes sense that we can apply all of the research done in computer algorithms to our day to day lives. The best organization system is a pile (LRU Cache). You can vastly improve your predictions of the future by first selecting one of three probability distributions. Being in a rut in life is just a local minima that can be overcome with an injection of randomness. I cannot overstate how much I liked this book. Eloquent Javascript: I got this in the humble programming bundle. Great supposedly introductory book that quickly ramps up in difficulty. I will go back and review certain of the chapters but I highly enjoyed it. Sublime Text Power User: I've had the paid version of SublimeText for some time now but I've never really put it through it's paces. I hope to fully come up to speed with this book + video lectures. Links Modern Pandas: Great way to learn Brandon Rhodes Tutorials: An excellent lecturer, clear explanations and good presentations. I found the Pandas and SQL tutorials quite nice for brushing up and becoming cleaner with tools that I already know. Bokeh: I find the architecture of this young project fascinating and powerful. Really looking forward to getting into it more. At my work, where programming is not a major focus, the static but interactive html documents it produces have been killer for me. I used to think that you needed a backend server to have most types of widgets/interactivity but it looks like you can also accomplish this by using more Javascript. A major motivator in my learning of Javascript more deeply. Linear Regression With Python: Nothing too earth shattering here but I highly appreciated the explanation of those terms from a regression analysis in statsmodels :)"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/some-fall-cleaning.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-09-14 23:00:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/kaan-divringi.html">
+<meta property="article:section" content="misc"/>
+<meta property="og:image" content="/images/me.jpg">
+
+  <title>My Occasional Mind &ndash; Some Fall Cleaning</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="/pages/about-me.html">About Me</a></li>
-                <li><a href="/pages/my-portfolio.html">My Portfolio</a></li>
-            </ul>
-        </nav>
-        <div class="header_box">
-            <h1><a href="">My Occasional Mind</a></h1>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Sep 14, 2016</h4>
+  <aside>
+    <div>
+      <a href="">
+        <img src="/images/me.jpg" alt="" title="">
+      </a>
+      <h1><a href=""></a></h1>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/some-fall-cleaning.html" rel="bookmark" title="Permanent Link to &quot;Some Fall Cleaning&quot;">Some Fall Cleaning</a>
-                </h2>
+<p>I have many curiousities and excitations</p>
+      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About Me</a></li>
+          <li><a href="/pages/my-portfolio.html#my-portfolio">My Portfolio</a></li>
 
-                
-                
+          <li><a href="/krypto/" target="_blank">Play Krypto!</a></li>
+          <li><a href="/d3-solar/" target="_blank">Explore Space!</a></li>
+        </ul>
+      </nav>
 
-                <p>It's been awhile and I've been busy, if not necessarily on this blog. A quick rundown:</p>
+      <ul class="social">
+        <li><a class="sc-Github" href="https://github.com/kdivringi" target="_blank"><i class="fa fa-Github"></i></a></li>
+        <li><a class="sc-LinkedIn" href="https://www.linkedin.com/in/kaandivringi" target="_blank"><i class="fa fa-LinkedIn"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+
+<article class="single">
+  <header>
+    <h1 id="some-fall-cleaning">Some Fall Cleaning</h1>
+    <p>
+          Posted on Wed 14 September 2016 in <a href="/category/misc.html">misc</a>
+
+
+    </p>
+  </header>
+  <div>
+    <p>It's been awhile and I've been busy, if not necessarily on this blog. A quick rundown:</p>
 <h1>Projects</h1>
 <ul>
 <li>Simulation Notebook: You can see the <a href="https://www.youtube.com/watch?v=kXDiK9ojJvo">video</a> from my portfolio. This is something that is tremendously exciting to me but I am having trouble finding the time to develop it further or even market it. It's been a busy year!</li>
@@ -46,7 +84,7 @@
 <h1>Books</h1>
 <p>I'm a bit weird in that I like reading not just books but programming books for fun. A few notables from my plate:</p>
 <ul>
-<li><a href="http://amzn.to/2cZI18W">Fluent Python</a>: 'Excellent' book, just excellent. I know Python and have been working with it for some number of years. This book, however, opened my eyes to some of the inner workings and underlying design decisions that make Python such a pleasure to work with. Areas of the language that seemed obtuse to me before were presented with opinionated context and through the gradual buildup I understood concepts that I previously found confusing. Also, more importantly, I got valuable context on when 'not' to use advanced features, avoiding the "Everything looks like a nail" situation. Great intermediate Python book.</li>
+<li><a href="http://amzn.to/2cZI18W">Fluent Python</a>: <em>Excellent</em> book, just excellent. I know Python and have been working with it for some number of years. This book, however, opened my eyes to some of the inner workings and underlying design decisions that make Python such a pleasure to work with. Areas of the language that seemed obtuse to me before were presented with opinionated context and through the gradual buildup I understood concepts that I previously found confusing. Also, more importantly, I got valuable context on when 'not' to use advanced features, avoiding the "Everything looks like a nail" situation. Great intermediate Python book.</li>
 <li><a href="http://amzn.to/2d1BwWi">Algorithms to Live By</a>: Self-help with programming? Such an odd but delightful concept but it makes sense that we can apply all of the research done in computer algorithms to our day to day lives. The best organization system is a pile (LRU Cache). You can vastly improve your predictions of the future by first selecting one of three probability distributions. Being in a rut in life is just a local minima that can be overcome with an injection of randomness. I cannot overstate how much I liked this book.</li>
 <li><a href="http://amzn.to/2cZILed">Eloquent Javascript</a>: I got this in the humble programming bundle. Great supposedly introductory book that quickly ramps up in difficulty. I will go back and review certain of the chapters but I highly enjoyed it.</li>
 <li><a href="https://sublimetextbook.com/">Sublime Text Power User</a>: I've had the paid version of SublimeText for some time now but I've never really put it through it's paces. I hope to fully come up to speed with this book + video lectures.</li>
@@ -58,21 +96,45 @@
 <li><a href="http://bokeh.pydata.org/en/latest/">Bokeh</a>: I find the architecture of this young project fascinating and powerful. Really looking forward to getting into it more. At my work, where programming is not a major focus, the static but interactive html documents it produces have been killer for me. I used to think that you needed a backend server to have most types of widgets/interactivity but <a href="https://www.kaggle.com/pjbutcher/d/berkeleyearth/climate-change-earth-surface-temperature-data/interactive-visualization-with-python?forumMessageId=131220#131220">it looks like you can also accomplish this by using more Javascript</a>. A major motivator in my learning of Javascript more deeply.</li>
 <li><a href="http://connor-johnson.com/2014/02/18/linear-regression-with-python/">Linear Regression With Python</a>: Nothing too earth shattering here but I highly appreciated the explanation of those terms from a regression analysis in statsmodels :)</li>
 </ul>
-                <div class="clear"></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
 
-                <div class="info">
-                    <a href="/some-fall-cleaning.html">posted at 23:00</a>
-                </div>
-            </article>
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
-    </div>
+
+
+</article>
+
+    <footer>
+<p>&copy; Kaan Divringi </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84301076-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " My Occasional Mind ",
+  "url" : "",
+  "image": "/images/me.jpg",
+  "description": ""
+}
+</script>
 </body>
 </html>
