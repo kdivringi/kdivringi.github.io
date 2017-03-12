@@ -17,7 +17,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="" />
+    <meta name="robots" content="" />
 
 
     <meta name="author" content="Kaan Divringi" />
@@ -31,6 +31,7 @@
 <meta property="og:image" content="/images/me.jpg">
 
   <title>My Occasional Mind</title>
+
 </head>
 <body>
   <aside>
@@ -56,9 +57,58 @@
         <li><a class="sc-LinkedIn" href="https://www.linkedin.com/in/kaandivringi" target="_blank"><i class="fa fa-LinkedIn"></i></a></li>
       </ul>
     </div>
+
+
   </aside>
   <main>
 
+
+
+
+<article>
+  <header>
+    <h2><a href="/not-enough-parenthesis.html#not-enough-parenthesis">Not Enough Parenthesis</a></h2>
+    <p>
+          Posted on Sat 11 March 2017 in <a href="/category/misc.html">misc</a>
+
+
+
+    </p>
+  </header>
+  <div>
+      <p><img alt="Lisp Heart I" src="/images/I_Heart_Lisp.png"></p>
+<p>I might be becoming a lisp weanie. I never thought that parenthesis would be my be-all-end-all. But I like them. I'm taking some sips from the functional cool-aid. </p>
+<p>How did this happen? I'm always into learning more about programming. The two languages I've been most into have been Python and Javascript, which are very similar languages. Not much of a way to grow as a programmer. So what are some languages to branch out into? A good way to start is to consider the weaknesses of Python, "the language I think in":</p>
+<ul>
+<li>Performance</li>
+<li>Concurrency</li>
+</ul>
+<p>There is also the prevailing wisdom that learning programming in the functional style will make you a better programmer <em>even in other languages.</em> After a brief foray into Rust, which was massively performant but also came with many low level systems considerations on top of everything else (another time!), I settled on <a href="http://clojure.org/">Clojure</a>.</p>
+<h1>Clojure and Python are of a kind.</h1>
+<p>Two sources had a great impact on my decision. The first was a great article on Clojure from the perspective of Python: <a href="http://www.pixelmonkey.org/2014/11/02/clojonic">Clojonic: Pythonic Clojure</a></p>
+<p>This article begins by noting one of the more important features of the language, its creator Rich Hickey:</p>
+<blockquote>
+<p>In stark contrast to Guido van Rossum in the Python community, Rich Hickey is undeniably not just the Clojure language’s creator, but also a kind of spokesperson for a functional programming renaissance. Guido van Rossum generally lays low and lets the Python language and community speak for itself, and tries to avoid controversy. To him, Python is just a popular tool he happened to create, and it doesn’t represent any major paradigm shift in programming. It’s a positive evolutionary improvement supported by a great open source ecosystem and community. To Hickey, however, “traditional” programming languages — but especially popular ones with an object-oriented focus, such as Java and C++ — are just plain wrong. He proposes Clojure as an antidote of sorts.</p>
+</blockquote>
+<p>His talks are fantastic and should be watched multiple times, even if Clojure is not your main language. I recommend checking out <a href="https://changelog.com/posts/rich-hickeys-greatest-hits">Rich Hickey's Greatest Hits</a> for a selection of his best talks.</p>
+<p>The Pixel Monkey article continues to talk about some of the most important points of emphasis of Clojure (Immutability/Composability/Scalability/Productivity) and finishes with implementing similar things in Python and Clojure, finding more similarities than expected. It even makes it a point to introduce threading, which is a nice way to make code more readable. For example, the leading image, while demonstrating in my mind some of lisp's charm, can seem 'backwards' for people to read. With threading, however, it can be written as:</p>
+<p><img alt="Threaded I Heart Lisp" src="/images/Threaded_I_Heart_Lisp.png"></p>
+<h1>In a different reality, I could have called Rust friend.</h1>
+<p>The other main influence to me was a comment on, oddly enough, the Rust subreddit: <a href="https://www.reddit.com/r/rust/comments/55fgdg/would_learning_rust_rust_concepts_help_a/d8ajg0l/">Would learning Rust &amp; Rust concepts help a developer who works mostly on web development and sometimes neural networks? (say more than Clojure would?)</a></p>
+<p>Addressing someone in a similar situation as me and considering the same two languages, the commenter (grayrest) outlines the benefits of both in a clear way before recommending Clojure. </p>
+<blockquote>
+<p>Both are worth learning. If I were going to pick one, I'd pick Clojure. My primary lens for understanding and designing systems is thinking about the shape and flow of state through the system. I think state is the core of incidental complexity in programming and thinking deeply about it is the second most important thing in designing systems (the first is picking abstractions, which is the core of inherent complexity). I came to my understanding of state through Clojure and its community. There are probably other ways to learn it but this is the path I know about.</p>
+</blockquote>
+<p>Even though I wound up choosing Clojure, the way the commenter talks about the benefits of Rust makes me want to circle back to that as well. Someday I'll get more into types, low-level systems programming and bleeding edge performance. Those concepts are just not germane to my needs right now.</p>
+<h1>More parallels</h1>
+<p><img alt="Evil Clojure From a Parallel Universe" src="/images/Clojure_Parallel.png"></p>
+<p>It also turns out that Clojure has may parallels to React, something else that I've gotten into recently. React's functional approach to rendering HTML fits incredibly well with Clojure and so Clojure was an early adopter (see this mention of <a href="https://facebook.github.io/react/blog/page19/">ClojureScript on the React blog in 2013</a>) and shared ideas (React performance page recommends Clojure-like immutable data structures, <a href="https://facebook.github.io/react/docs/update.html">Facebook's Immutable-js library</a> mentions Clojure 3 times and has a Rich Hickey quote). Redux may be one of the most popular state management libraries for React and it is highly functional. ClojureScript, in addition to being a very mature transpile-to-JS technology, also has <a href="https://github.com/omcljs/om/wiki/Quick-Start-(om.next)">om.next</a>, its answer to the next Facebook's GraphQL and Netflix's Falcor for performing API data calls that are more complex than REST.</p>
+<p>I don't yet know how much I'll use ClojureScript. I did modify <a href="http://kdivringi.github.io/krypto/">Krypto</a> to use Redux for state management under the hood but I ran up against quite a learning curve when trying to re-implement Krypto in om.next. Krypto is probably far too simple to see benefits from the more complex state management libraries anyways.</p>
+<p>Meanwhile, I've been through <a href="http://www.braveclojure.com/clojure-for-the-brave-and-true/">Clojure for the Brave and True</a>, been working my way through the exercises in <a href="http://4clojure.com/">4Clojure</a>, and I've even started reading <a href="https://www.amazon.com/Clojure-Applied-Practitioner-Ben-Vandgrift/dp/1680500740">Clojure Applied</a>. Even more, I've gotten into <a href="http://spacemacs.org/">Spacemacs</a>, an Emacs variant, due to its utility for writing Clojure and lisps in general. It's far from my main editor but I've been dipping my toes in org-mode and slowly been going further into the rabbit hole. </p>
+<p>We'll see how it all goes. I like the parenthesis and I'm finding that the code I write comes out elegant by default, more so than in other languages. The most important thing is that I'm growing as a programmer and continuing to work on things that excite me and to boldly go to new frontiers of programming!</p>
+  </div>
+  <hr />
+</article>
 <article>
   <header>
     <h2><a href="/new-version-of-krypto-in-react.html#new-version-of-krypto-in-react">New version of Krypto... in React!</a></h2>
@@ -132,7 +182,7 @@
   </header>
   <div>
       <p>Looking for an interactive visualization? <a href="/d3-solar/index.html">Here you go!</a></p>
-<p><img alt="Solar Visualization Thumbnail" src="/images/SolarExploration.gif" title="Solar Exploration Interactive Visualization" /></p>
+<p><img alt="Solar Visualization Thumbnail" src="/images/SolarExploration.gif" title="Solar Exploration Interactive Visualization"></p>
 <p>This <a href="https://pages.github.com/">Github Pages</a> site was originally created just to host my Solar Exploration Timeline visualization done in D3 for my Udacity Nanodegree. I couldn't put it on <a href="https://bl.ocks.org/">bl.ocks.org</a> because of the <a href="http://getbootstrap.com/2.3.2/">Bootstrap</a> formatting that I used.</p>
 <p>Now that I made this site a thing, you can find our previously featured visualization <a href="/d3-solar/index.html">here</a>. Enjoy clicking and zooming around the solar system!</p>
   </div>
@@ -187,7 +237,7 @@
 </ul>
 <h1>Personal Projects</h1>
 <ul>
-<li><a href="/krypto/">Krypto</a>: Krypto is an arithmetic card game and one of my gf favorites. It was originally an Android App of fairly poor quality and incomplete. Here it has been recreated as a webpage and seems to do everything it needs to.</li>
+<li><a href="/krypto/">Krypto</a>: Krypto is an arithmetic card game and one of my gf's favorites. It was originally an Android App of fairly poor quality and incomplete. Here it has been recreated as a webpage and seems to do everything it needs to. It has been refined over time to use React, Redux and some crude animations.</li>
 </ul>
   </div>
   <hr />
@@ -212,6 +262,9 @@
 
   <div class="pagination">
   </div>
+
+
+
 
     <footer>
 <p>&copy; Kaan Divringi </p>
@@ -243,5 +296,6 @@
   "description": ""
 }
 </script>
+
 </body>
 </html>

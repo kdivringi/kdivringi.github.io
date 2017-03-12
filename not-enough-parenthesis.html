@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+
+<meta name="author" content="Kaan Divringi" />
+<meta name="description" content="I might be becoming a lisp weanie. I never thought that parenthesis would be my be-all-end-all. But I like them. I'm taking some sips from the functional cool-aid. How did this happen? I'm always into learning more about programming. The two languages I've been most into have been Python and Javascript, which are very similar languages. Not much of a way to grow as a programmer. So what are some languages to branch out into? A good way to start is to consider the weaknesses of Python, "the language I think in": Performance Concurrency There is also the prevailing wisdom that learning programming in the functional style will make you a better programmer even in other languages. After a brief foray into Rust, which was massively performant but also came with many low level systems considerations on top of everything else (another time!), I settled on Clojure. Clojure and Python are of a kind. Two sources had a great impact on my decision. The first was a great article on Clojure from the perspective of Python: Clojonic: Pythonic Clojure This article begins by noting one of the more important features of the language, its creator Rich Hickey: In stark contrast to Guido van Rossum in the Python community, Rich Hickey is undeniably not just the Clojure language’s creator, but also a kind of spokesperson for a functional programming renaissance. Guido van Rossum generally lays low and lets the Python language and community speak for itself, and tries to avoid controversy. To him, Python is just a popular tool he happened to create, and it doesn’t represent any major paradigm shift in programming. It’s a positive evolutionary improvement supported by a great open source ecosystem and community. To Hickey, however, “traditional” programming languages — but especially popular ones with an object-oriented focus, such as Java and C++ — are just plain wrong. He proposes Clojure as an antidote of sorts. His talks are fantastic and should be watched multiple times, even if Clojure is not your main language. I recommend checking out Rich Hickey's Greatest Hits for a selection of his best talks. The Pixel Monkey article continues to talk about some of the most important points of emphasis of Clojure (Immutability/Composability/Scalability/Productivity) and finishes with implementing similar things in Python and Clojure, finding more similarities than expected. It even makes it a point to introduce threading, which is a nice way to make code more readable. For example, the leading image, while demonstrating in my mind some of lisp's charm, can seem 'backwards' for people to read. With threading, however, it can be written as: In a different reality, I could have called Rust friend. The other main influence to me was a comment on, oddly enough, the Rust subreddit: Would learning Rust & Rust concepts help a developer who works mostly on web development and sometimes neural networks? (say more than Clojure would?) Addressing someone in a similar situation as me and considering the same two languages, the commenter (grayrest) outlines the benefits of both in a clear way before recommending Clojure. Both are worth learning. If I were going to pick one, I'd pick Clojure. My primary lens for understanding and designing systems is thinking about the shape and flow of state through the system. I think state is the core of incidental complexity in programming and thinking deeply about it is the second most important thing in designing systems (the first is picking abstractions, which is the core of inherent complexity). I came to my understanding of state through Clojure and its community. There are probably other ways to learn it but this is the path I know about. Even though I wound up choosing Clojure, the way the commenter talks about the benefits of Rust makes me want to circle back to that as well. Someday I'll get more into types, low-level systems programming and bleeding edge performance. Those concepts are just not germane to my needs right now. More parallels It also turns out that Clojure has may parallels to React, something else that I've gotten into recently. React's functional approach to rendering HTML fits incredibly well with Clojure and so Clojure was an early adopter (see this mention of ClojureScript on the React blog in 2013) and shared ideas (React performance page recommends Clojure-like immutable data structures, Facebook's Immutable-js library mentions Clojure 3 times and has a Rich Hickey quote). Redux may be one of the most popular state management libraries for React and it is highly functional. ClojureScript, in addition to being a very mature transpile-to-JS technology, also has om.next, its answer to the next Facebook's GraphQL and Netflix's Falcor for performing API data calls that are more complex than REST. I don't yet know how much I'll use ClojureScript. I did modify Krypto to use Redux for state management under the hood but I ran up against quite a learning curve when trying to re-implement Krypto in om.next. Krypto is probably far too simple to see benefits from the more complex state management libraries anyways. Meanwhile, I've been through Clojure for the Brave and True, been working my way through the exercises in 4Clojure, and I've even started reading Clojure Applied. Even more, I've gotten into Spacemacs, an Emacs variant, due to its utility for writing Clojure and lisps in general. It's far from my main editor but I've been dipping my toes in org-mode and slowly been going further into the rabbit hole. We'll see how it all goes. I like the parenthesis and I'm finding that the code I write comes out elegant by default, more so than in other languages. The most important thing is that I'm growing as a programmer and continuing to work on things that excite me and to boldly go to new frontiers of programming!" />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="My Occasional Mind"/>
+<meta property="og:title" content="Not Enough Parenthesis"/>
+<meta property="og:description" content="I might be becoming a lisp weanie. I never thought that parenthesis would be my be-all-end-all. But I like them. I'm taking some sips from the functional cool-aid. How did this happen? I'm always into learning more about programming. The two languages I've been most into have been Python and Javascript, which are very similar languages. Not much of a way to grow as a programmer. So what are some languages to branch out into? A good way to start is to consider the weaknesses of Python, "the language I think in": Performance Concurrency There is also the prevailing wisdom that learning programming in the functional style will make you a better programmer even in other languages. After a brief foray into Rust, which was massively performant but also came with many low level systems considerations on top of everything else (another time!), I settled on Clojure. Clojure and Python are of a kind. Two sources had a great impact on my decision. The first was a great article on Clojure from the perspective of Python: Clojonic: Pythonic Clojure This article begins by noting one of the more important features of the language, its creator Rich Hickey: In stark contrast to Guido van Rossum in the Python community, Rich Hickey is undeniably not just the Clojure language’s creator, but also a kind of spokesperson for a functional programming renaissance. Guido van Rossum generally lays low and lets the Python language and community speak for itself, and tries to avoid controversy. To him, Python is just a popular tool he happened to create, and it doesn’t represent any major paradigm shift in programming. It’s a positive evolutionary improvement supported by a great open source ecosystem and community. To Hickey, however, “traditional” programming languages — but especially popular ones with an object-oriented focus, such as Java and C++ — are just plain wrong. He proposes Clojure as an antidote of sorts. His talks are fantastic and should be watched multiple times, even if Clojure is not your main language. I recommend checking out Rich Hickey's Greatest Hits for a selection of his best talks. The Pixel Monkey article continues to talk about some of the most important points of emphasis of Clojure (Immutability/Composability/Scalability/Productivity) and finishes with implementing similar things in Python and Clojure, finding more similarities than expected. It even makes it a point to introduce threading, which is a nice way to make code more readable. For example, the leading image, while demonstrating in my mind some of lisp's charm, can seem 'backwards' for people to read. With threading, however, it can be written as: In a different reality, I could have called Rust friend. The other main influence to me was a comment on, oddly enough, the Rust subreddit: Would learning Rust & Rust concepts help a developer who works mostly on web development and sometimes neural networks? (say more than Clojure would?) Addressing someone in a similar situation as me and considering the same two languages, the commenter (grayrest) outlines the benefits of both in a clear way before recommending Clojure. Both are worth learning. If I were going to pick one, I'd pick Clojure. My primary lens for understanding and designing systems is thinking about the shape and flow of state through the system. I think state is the core of incidental complexity in programming and thinking deeply about it is the second most important thing in designing systems (the first is picking abstractions, which is the core of inherent complexity). I came to my understanding of state through Clojure and its community. There are probably other ways to learn it but this is the path I know about. Even though I wound up choosing Clojure, the way the commenter talks about the benefits of Rust makes me want to circle back to that as well. Someday I'll get more into types, low-level systems programming and bleeding edge performance. Those concepts are just not germane to my needs right now. More parallels It also turns out that Clojure has may parallels to React, something else that I've gotten into recently. React's functional approach to rendering HTML fits incredibly well with Clojure and so Clojure was an early adopter (see this mention of ClojureScript on the React blog in 2013) and shared ideas (React performance page recommends Clojure-like immutable data structures, Facebook's Immutable-js library mentions Clojure 3 times and has a Rich Hickey quote). Redux may be one of the most popular state management libraries for React and it is highly functional. ClojureScript, in addition to being a very mature transpile-to-JS technology, also has om.next, its answer to the next Facebook's GraphQL and Netflix's Falcor for performing API data calls that are more complex than REST. I don't yet know how much I'll use ClojureScript. I did modify Krypto to use Redux for state management under the hood but I ran up against quite a learning curve when trying to re-implement Krypto in om.next. Krypto is probably far too simple to see benefits from the more complex state management libraries anyways. Meanwhile, I've been through Clojure for the Brave and True, been working my way through the exercises in 4Clojure, and I've even started reading Clojure Applied. Even more, I've gotten into Spacemacs, an Emacs variant, due to its utility for writing Clojure and lisps in general. It's far from my main editor but I've been dipping my toes in org-mode and slowly been going further into the rabbit hole. We'll see how it all goes. I like the parenthesis and I'm finding that the code I write comes out elegant by default, more so than in other languages. The most important thing is that I'm growing as a programmer and continuing to work on things that excite me and to boldly go to new frontiers of programming!"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/not-enough-parenthesis.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-03-11 20:10:00-08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/kaan-divringi.html">
+<meta property="article:section" content="misc"/>
+<meta property="og:image" content="/images/me.jpg">
+
+  <title>My Occasional Mind &ndash; Not Enough Parenthesis</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="">
+        <img src="/images/me.jpg" alt="" title="">
+      </a>
+      <h1><a href=""></a></h1>
+
+<p>I have many curiousities and excitations</p>
+      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About Me</a></li>
+          <li><a href="/pages/my-portfolio.html#my-portfolio">My Portfolio</a></li>
+
+          <li><a href="/krypto/" target="_blank">Play Krypto!</a></li>
+          <li><a href="/d3-solar/" target="_blank">Explore Space!</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-Github" href="https://github.com/kdivringi" target="_blank"><i class="fa fa-Github"></i></a></li>
+        <li><a class="sc-LinkedIn" href="https://www.linkedin.com/in/kaandivringi" target="_blank"><i class="fa fa-LinkedIn"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+    <h1 id="not-enough-parenthesis">Not Enough Parenthesis</h1>
+    <p>
+          Posted on Sat 11 March 2017 in <a href="/category/misc.html">misc</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><img alt="Lisp Heart I" src="/images/I_Heart_Lisp.png"></p>
+<p>I might be becoming a lisp weanie. I never thought that parenthesis would be my be-all-end-all. But I like them. I'm taking some sips from the functional cool-aid. </p>
+<p>How did this happen? I'm always into learning more about programming. The two languages I've been most into have been Python and Javascript, which are very similar languages. Not much of a way to grow as a programmer. So what are some languages to branch out into? A good way to start is to consider the weaknesses of Python, "the language I think in":</p>
+<ul>
+<li>Performance</li>
+<li>Concurrency</li>
+</ul>
+<p>There is also the prevailing wisdom that learning programming in the functional style will make you a better programmer <em>even in other languages.</em> After a brief foray into Rust, which was massively performant but also came with many low level systems considerations on top of everything else (another time!), I settled on <a href="http://clojure.org/">Clojure</a>.</p>
+<h1>Clojure and Python are of a kind.</h1>
+<p>Two sources had a great impact on my decision. The first was a great article on Clojure from the perspective of Python: <a href="http://www.pixelmonkey.org/2014/11/02/clojonic">Clojonic: Pythonic Clojure</a></p>
+<p>This article begins by noting one of the more important features of the language, its creator Rich Hickey:</p>
+<blockquote>
+<p>In stark contrast to Guido van Rossum in the Python community, Rich Hickey is undeniably not just the Clojure language’s creator, but also a kind of spokesperson for a functional programming renaissance. Guido van Rossum generally lays low and lets the Python language and community speak for itself, and tries to avoid controversy. To him, Python is just a popular tool he happened to create, and it doesn’t represent any major paradigm shift in programming. It’s a positive evolutionary improvement supported by a great open source ecosystem and community. To Hickey, however, “traditional” programming languages — but especially popular ones with an object-oriented focus, such as Java and C++ — are just plain wrong. He proposes Clojure as an antidote of sorts.</p>
+</blockquote>
+<p>His talks are fantastic and should be watched multiple times, even if Clojure is not your main language. I recommend checking out <a href="https://changelog.com/posts/rich-hickeys-greatest-hits">Rich Hickey's Greatest Hits</a> for a selection of his best talks.</p>
+<p>The Pixel Monkey article continues to talk about some of the most important points of emphasis of Clojure (Immutability/Composability/Scalability/Productivity) and finishes with implementing similar things in Python and Clojure, finding more similarities than expected. It even makes it a point to introduce threading, which is a nice way to make code more readable. For example, the leading image, while demonstrating in my mind some of lisp's charm, can seem 'backwards' for people to read. With threading, however, it can be written as:</p>
+<p><img alt="Threaded I Heart Lisp" src="/images/Threaded_I_Heart_Lisp.png"></p>
+<h1>In a different reality, I could have called Rust friend.</h1>
+<p>The other main influence to me was a comment on, oddly enough, the Rust subreddit: <a href="https://www.reddit.com/r/rust/comments/55fgdg/would_learning_rust_rust_concepts_help_a/d8ajg0l/">Would learning Rust &amp; Rust concepts help a developer who works mostly on web development and sometimes neural networks? (say more than Clojure would?)</a></p>
+<p>Addressing someone in a similar situation as me and considering the same two languages, the commenter (grayrest) outlines the benefits of both in a clear way before recommending Clojure. </p>
+<blockquote>
+<p>Both are worth learning. If I were going to pick one, I'd pick Clojure. My primary lens for understanding and designing systems is thinking about the shape and flow of state through the system. I think state is the core of incidental complexity in programming and thinking deeply about it is the second most important thing in designing systems (the first is picking abstractions, which is the core of inherent complexity). I came to my understanding of state through Clojure and its community. There are probably other ways to learn it but this is the path I know about.</p>
+</blockquote>
+<p>Even though I wound up choosing Clojure, the way the commenter talks about the benefits of Rust makes me want to circle back to that as well. Someday I'll get more into types, low-level systems programming and bleeding edge performance. Those concepts are just not germane to my needs right now.</p>
+<h1>More parallels</h1>
+<p><img alt="Evil Clojure From a Parallel Universe" src="/images/Clojure_Parallel.png"></p>
+<p>It also turns out that Clojure has may parallels to React, something else that I've gotten into recently. React's functional approach to rendering HTML fits incredibly well with Clojure and so Clojure was an early adopter (see this mention of <a href="https://facebook.github.io/react/blog/page19/">ClojureScript on the React blog in 2013</a>) and shared ideas (React performance page recommends Clojure-like immutable data structures, <a href="https://facebook.github.io/react/docs/update.html">Facebook's Immutable-js library</a> mentions Clojure 3 times and has a Rich Hickey quote). Redux may be one of the most popular state management libraries for React and it is highly functional. ClojureScript, in addition to being a very mature transpile-to-JS technology, also has <a href="https://github.com/omcljs/om/wiki/Quick-Start-(om.next)">om.next</a>, its answer to the next Facebook's GraphQL and Netflix's Falcor for performing API data calls that are more complex than REST.</p>
+<p>I don't yet know how much I'll use ClojureScript. I did modify <a href="http://kdivringi.github.io/krypto/">Krypto</a> to use Redux for state management under the hood but I ran up against quite a learning curve when trying to re-implement Krypto in om.next. Krypto is probably far too simple to see benefits from the more complex state management libraries anyways.</p>
+<p>Meanwhile, I've been through <a href="http://www.braveclojure.com/clojure-for-the-brave-and-true/">Clojure for the Brave and True</a>, been working my way through the exercises in <a href="http://4clojure.com/">4Clojure</a>, and I've even started reading <a href="https://www.amazon.com/Clojure-Applied-Practitioner-Ben-Vandgrift/dp/1680500740">Clojure Applied</a>. Even more, I've gotten into <a href="http://spacemacs.org/">Spacemacs</a>, an Emacs variant, due to its utility for writing Clojure and lisps in general. It's far from my main editor but I've been dipping my toes in org-mode and slowly been going further into the rabbit hole. </p>
+<p>We'll see how it all goes. I like the parenthesis and I'm finding that the code I write comes out elegant by default, more so than in other languages. The most important thing is that I'm growing as a programmer and continuing to work on things that excite me and to boldly go to new frontiers of programming!</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Kaan Divringi </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84301076-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " My Occasional Mind ",
+  "url" : "",
+  "image": "/images/me.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
